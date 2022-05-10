@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+  <div>
+      <h2> Search Results for: [[${keyword}]]</h2>
+  </div>
+
+  <div class="topnav">
+
+      <a  href="/userhome/home">Home</a>
+      <a href="/userhome/Restaurants">Restaurants</a>
+      <a href="/userhome/cart">Cart</a>
+      <form th:action="@{/userhome/search-results}" method="get">
+          <label>Search by Restaurant Name, Restaurant location, Item name and Item Price(less than mentioned price)</label>
+         <br>
+          <input type="search"  name="keyword" />
+          <input type="submit" value="Search" />
+
+      </form>
+  </div>
+
+
+<table border="2" width="70%" cellpadding="2">
+    <tr>
+        <th> Restaurant Name</th>
+        <th>Restaurant Location</th>
+        <th> Item Name</th>
+        <th> Item Price</th>
+    </tr>
+
+        <tr th:each="item: ${list}" >
+            <form th:action="@{/userhome/add-to-cart}" >
+            <td th:text="${item.restaurantName}"  />
+            <td th:text="${item.restaurantLocation}" />
+            <td th:text="${item.itemName}" />
+            <td th:text="${item.itemPrice}" />
+                <td th:text="${item.uniqueId}"> </td>
+            <td >
+                <input type="hidden" th:value= "${item.uniqueId}"  name="cartitem" /> <button type="submit" >Add to Cart</button>
+            </td>
+            </form>
+        </tr>
+
+</table>
+
+  <br>
+  <br>
+
+  <a href="/user/rewardpoints">Check Membership Points</a>
+  <br>
+  <br>
+  <a href="/auth/logout"> Logout </a>
+
+</body>
+</html>

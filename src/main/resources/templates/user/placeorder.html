@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Order</title>
+        <style>
+	a:link, a:visited {
+	background-color: white;
+	color: black;
+	border: 2px solid green;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	}
+
+	a:hover, a:active {
+	background-color: green;
+	color: white;
+	}
+</style>
+</head>
+<body>
+<div class="topnav">
+
+    <a class="active" href="/userhome/home">Home</a>
+    <a href="/userhome/Restaurants">Restaurants</a>
+    <a href="#cart">Cart</a>
+    <a href="/user/rewardpoints">Check Membership Points</a>
+	<a href="/auth/logout"> Logout </a> <br> <br>
+
+    <form th:action="@{/userhome/search-results}" method="get">
+        <label>Search by Restaurant Name, Restaurant location, Item name and Item Price(less than mentioned price)</label>
+        <br>
+        <input type="search" width="70%" name="keyword" />
+        <input type="submit" value="Search" />
+
+    </form>
+
+
+</div>
+
+<div>
+    <table  border="2" width="40%" cellpadding="2" align="center">
+        <thead>
+        <tr>
+            <td align="center"> Order Details </td>
+        </tr>
+        <tr>
+            <td>Order Id</td>
+            <td> Restaurant name</td>
+            <td> Total Amount</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${order}">
+            <td th:text="${item.orderId}" />
+            <td th:text=" ${item.restaurantName}" />
+            <td th:text=" ${item.totalAmount}" />
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <table align="center">
+        <thead>
+        <tr>
+            <th> ETA </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${order}">
+            <td th:text="${item.eta}">   </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <table  border="2" width="40%" cellpadding="2" align="center">
+        <thead>
+        <tr>
+            <td>Order Status</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text=" ${orderStatus}" />
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div>
+    <table  border="2" width="40%" cellpadding="2" align="center">
+        <thead>
+        <tr>
+            <td>Membership Discount</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text=" ${discount}" />
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div>
+    <table  border="2" width="40%" cellpadding="2" align="center">
+        <thead>
+        <tr>
+            <td align="center"> Delivery Person Details </td>
+        </tr>
+        <tr>
+            <td> Delivery Person Name</td>
+            <td> Delivery Person Phone Number</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${deliveryPerson}">
+            <td th:text=" ${deliveryPerson.getName()}" />
+            <td th:text=" ${deliveryPerson.getP_number()}" />
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

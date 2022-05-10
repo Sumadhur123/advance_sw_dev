@@ -1,0 +1,65 @@
+image: node:latest
+
+before_script:
+
+stages:
+  - build
+  - test
+  - deploy_develop
+  - deploy_prod
+
+buildStep:
+  image: maven:3-jdk-8
+  stage: build
+  tags:
+    - dalfcs_docker_kvm
+  artifacts:
+    paths:
+    - group16/target
+  script:
+    mvn clean install
+
+testStep:
+  image: maven:3-jdk-8
+  stage: test
+  tags:
+    - dalfcs_docker_kvm
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - group16/target/surefire-reports/TEST-*.xml
+  script:
+    mvn verify
+
+deployStepDevelop:
+  type: deploy
+  stage: deploy_develop
+  image: ruby:latest
+  script:
+    - cd /builds/courses/2021-summer/csci-5308/group16/
+    - gem install dpl --source http://rubygems.org
+    - dpl --provider=heroku --app=$HEROKU_APP_TEST --api-key=$HEROKU_API_KEY
+  environment:
+    name: staging
+    url: https://g16-food-delivery-test.herokuapp.com/
+  only:
+    - develop
+  tags:
+    - dalfcs_gitlab_docker_ci
+
+deployStepProd:
+  type: deploy
+  stage: deploy_prod
+  image: ruby:latest
+  script:
+    - cd /builds/courses/2021-summer/csci-5308/group16/
+    - gem install dpl --source http://rubygems.org
+    - dpl --provider=heroku --app=$HEROKU_APP_PROD --api-key=$HEROKU_API_KEY
+  environment:
+    name: production
+    url: https://g16-food-delivery-prod.herokuapp.com/
+  only:
+    - master
+  tags:
+    - dalfcs_gitlab_docker_ci

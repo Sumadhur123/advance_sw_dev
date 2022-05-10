@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>User signup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+	a:link, a:visited {
+  	background-color: white;
+  	color: black;
+  	border: 2px solid green;
+  	padding: 10px 20px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+	}
+
+	a:hover, a:active {
+	  background-color: green;
+ 	 color: white;
+	}
+	h3 {
+ 	 text-indent: 50px;
+  	letter-spacing: 3px;
+  	color: red;
+	}
+</style>
+</head>
+
+<a href="/auth/signin">Go to Login Page</a> 
+<a href="/auth/user_signup">User Signup Page</a> <br> <br>
+
+<body>
+<h1>Admin signup</h1>
+<form action="#" th:action="@{/auth/admin_signup}" th:object="${user}" method="post">
+
+    <p>Full name: <input type="text" th:field="*{full_name}" /></p>
+<!--    <p th:each="err : ${#fields.errors('full_name')}" th:text="${err}" class="error" /><br />-->
+
+    <p>Email: <input type="text" th:field="*{email}" /></p>
+
+    <p>Username: <input type="text" th:field="*{user_name}" /></p>
+
+    <p>Password: <input type="password" th:field="*{password}" /></p>
+
+    <p>Hotel name: <input type="text" th:field="*{hotel_name}" /></p>
+    
+    <p>Birthday: <input type="date" required="required" th:field="*{birthday}" /></p>
+
+    <p>Pincode: <select th:field="*{pincode}">
+        <option value="B3H 1C4">B3H 1C4</option>
+        <option value="B3H 2A5">B3H 2A5</option>
+        <option value="B3H 1R9">B3H 1R9</option>
+        <option value="B3H 2M5">B3H 2M5</option>
+        <option value="B3H 1W9">B3H 1W9</option>
+        <option value="B3H 1E5">B3H 1E5</option>
+        <option value="B3H 4R2">B3H 4R2</option>
+    </select></p>
+
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+<p th:text="${message}"/>
+<p th:text="${suggestedUsernames}"/>
+
+</body>
+</html>

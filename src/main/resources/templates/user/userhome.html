@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>User signup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+a:link, a:visited {
+	background-color: white;
+	color: black;
+	border: 2px solid green;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+a:hover, a:active {
+	background-color: green;
+	color: white;
+}
+</style>
+</head>
+<body>
+
+<h1>User Home : Welcome</h1>
+<div class="topnav">
+
+    <a class="active" href="/userhome/home">Home</a>
+    <a href="/userhome/Restaurants">Restaurants</a>
+    <a href="/userhome/cart">Cart</a>
+    <a href="/user/rewardpoints">Check Membership Points</a>
+	<a href="/auth/logout"> Logout </a> <br> <br>
+    <form th:action="@{/userhome/search-results}" method="get">
+        <label>Search by Restaurant Name, Restaurant location, Item name and Item Price(less than mentioned price)</label>
+        <br>
+        <input type="search" width="70%" name="keyword" />
+        <input type="submit" value="Search" />
+
+    </form>
+</div>
+<br>
+<br>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>Table Reservation</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+  <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+<div align="center">
+  <h1>Reserve a new table</h1>
+  <br />
+  <div class="col-sm-4">
+    <form action="#" th:action="@{/table/update}" th:object="${table}" method="post">
+
+
+      <div alight="left">
+        <tr>
+          <label class="form-label" >Name</label>
+          <td>
+            <input type="hidden" th:field="*{table_id}" />
+            <input type="text" th:field="*{owner_name}" class="form-control" placeholder="Item Name" />
+          </td>
+        </tr>
+      </div>
+
+      <div alight="left">
+
+        <tr>
+          <label class="form-label" >No_of_People</label>
+          <td><input type="text" th:field="*{no_of_people}" class="form-control" placeholder="Item Catagory" /></td>
+        </tr>
+      </div>
+      <div alight="left">
+        <tr>
+          <label class="form-label" >time</label>
+          <td><input type="text" th:field="*{time}" class="form-control" placeholder="Time" /></td>
+        </tr>
+      </div>
+      <br>
+      <tr>
+        <td colspan="2"><button type="submit" class="btn btn-info">Update</button> </td>
+      </tr>
+      </table>
+    </form>
+  </div>
+</div>
+</body>
+</html>

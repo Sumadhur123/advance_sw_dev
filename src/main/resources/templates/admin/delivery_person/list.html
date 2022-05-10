@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>List delivery person</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<style>
+    a:link, a:visited {
+        background-color: white;
+        color: black;
+        border: 2px solid green;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    a:hover, a:active {
+        background-color: green;
+        color: white;
+    }
+    .title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+<body>
+<h1>Admin Home : Welcome</h1>
+<a href="/admin-profit-loss-analysis">Operations Cost and Profit Loss analysis</a>
+<a href="/hotel-sales">View all hotel sales</a>
+<a href="/delivery_person/">Delivery persons</a>
+<a href="/auth/logout"> Logout </a>
+<div class="title-container">
+    <h1>List delivery person</h1>
+    <a href="/delivery_person/add">
+        Add new person
+    </a>
+</div>
+<table border="1" width="60%">
+    <tr>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="person : ${peopleList}">
+        <td><span th:text="${person.getName()}"> Title </span></td>
+        <td><a th:href="${'/delivery_person/delete/' + person.getId()}">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>
